@@ -1,51 +1,24 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
 	"log"
 	"net/http"
+	"time"
 )
 
-type artistStruc struct {
-	id           int      `json:"id"`
-	name         string   `json:"name"`
-	image        string   `json:"image"`
-	members      []string `json:"members"`
-	creationDate int      `json:"creationDate"`
-	firstAlbum   string   `json:"firstAlbum"`
-	locations    string   `json:"locations"`
-	concertDates string   `json:"concertDates"`
-	relations    string   `json:"relations"`
+func main() {
+	artists := fetchArtists()
+	//fetchRelation()
+	serverCreate(artists)
 }
 
-func main() {
-
-	var artists []artistStruc
-
-	apiArtist, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
-	if err != nil {
-		log.Fatal(err)
+func serverCreate(artists []artistsStruc) {
+	indexHandler := func(w http.ResponseWriter, req *http.Request) {
+		IndexHandler(w, req, artists)
 	}
-	body, err := io.ReadAll(apiArtist.Body)
-	apiArtist.Body.Close()
-	if apiArtist.StatusCode > 299 {
-		log.Fatalf("Response failed with status code: %d and\nbody: %s\n", apiArtist.StatusCode, body)
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
-	/* 	var data map[string]interface{}
-	 */erro := json.Unmarshal([]byte(body), &artists)
-	if erro != nil {
-		fmt.Println("error:", erro)
-	}
-	fmt.Printf("%+v", artists)
-
-	/* mux := http.NewServeMux()
+	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
-	mux.HandleFunc("/", TBD)
+	mux.HandleFunc("/", indexHandler)
 
 	server := &http.Server{
 		Addr:              ":8080",          //adresse du server (le port choisi est à titre d'exemple)
@@ -58,19 +31,5 @@ func main() {
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
-	} */
-
-	/* res, err := http.Get("http://www.google.com/robots.txt")
-	if err != nil {
-		log.Fatal(err)
 	}
-	body, err := io.ReadAll(res.Body)
-	res.Body.Close()
-	if res.StatusCode > 299 {
-		log.Fatalf("Response failed with status code: %d and\nbody: %s\n", res.StatusCode, body)
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%s", body) */
 }
