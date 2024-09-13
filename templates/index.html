@@ -54,11 +54,13 @@
     </header>
     <div class="cards-container">
         {{range .}}
-            <div class="card" style="background-image: url(/static/missing);">
-                <a href="/details?ID={{.ID}}">
-                    <h2>{{.Name}}</h2>
-                    <a href="/details?ID={{.ID}}" class="details-button">Learn more about {{.Name}}</a>
-                </a>
+            <div classe="losange">
+                <div class="card" style="background-image: url({{.Image}});">
+                    <a href="/details?ID={{.ID}}">
+                        <h2>{{.Name}}</h2>
+                        <a href="/details?ID={{.ID}}" class="details-button">Learn more about {{.Name}}</a>
+                    </a>
+                </div>
             </div>
         {{end}}
     </div>
