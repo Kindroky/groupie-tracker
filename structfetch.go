@@ -18,9 +18,12 @@ type artistsStruc struct {
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
 }
+type relationNoIndex struct {
+	Index []relationStruct `json:"index"`
+}
 type relationStruct struct {
-	ID             int        `json:"index.id"`
-	DatesLocations [][]string `json:"index.datesLocations"`
+	ID             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
 }
 
 func fetchArtists() []artistsStruc {
@@ -29,6 +32,7 @@ func fetchArtists() []artistsStruc {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer apiArtist.Body.Close()
 	err = json.NewDecoder(apiArtist.Body).Decode(&artists)
 	if err != nil {
 		fmt.Println("error:", err)
@@ -37,14 +41,15 @@ func fetchArtists() []artistsStruc {
 }
 
 func fetchRelation() []relationStruct {
-	var relation []relationStruct
+	var relation relationNoIndex
 	apiRelation, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer apiRelation.Body.Close()
 	err = json.NewDecoder(apiRelation.Body).Decode(&relation)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	return relation
+	return relation.Index
 }

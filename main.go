@@ -8,7 +8,7 @@ import (
 
 func main() {
 	artists := fetchArtists()
-	//fetchRelation()
+	relation := fetchRelation()
 	serverCreate(artists)
 }
 
@@ -16,8 +16,12 @@ func serverCreate(artists []artistsStruc) {
 	indexHandler := func(w http.ResponseWriter, req *http.Request) {
 		IndexHandler(w, req, artists)
 	}
+	detailsHandler := func(w http.ResponseWriter, req *http.Request) {
+		DetailsHandler(w, req)
+	}
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	mux.HandleFunc("/details,", detailsHandler)
 	mux.HandleFunc("/", indexHandler)
 
 	server := &http.Server{

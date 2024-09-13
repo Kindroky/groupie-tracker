@@ -40,3 +40,7 @@ func IndexHandler(w http.ResponseWriter, req *http.Request, artists []artistsStr
 		ErrorHandler(w, req, http.StatusInternalServerError, "internal server error")
 	}
 }
+
+/* func DetailsHandler(w http.ResponseWriter, req *http.Request, artists []artistsStruc) {
+	artistID, err := url.ParseQuery("/")
+} */
