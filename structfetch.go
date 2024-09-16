@@ -42,9 +42,9 @@ type datesStruct struct {
 
 type pageData struct {
 	Artists   artistsStruc
-	Locations []locationStruct
-	Dates     []datesStruct
-	Relation  []relationStruct
+	Locations locationStruct
+	Dates     datesStruct
+	Relation  relationStruct
 }
 
 func fetchArtists() []artistsStruc {

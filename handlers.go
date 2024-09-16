@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -44,9 +43,15 @@ func IndexHandler(w http.ResponseWriter, req *http.Request, artists []artistsStr
 }
 
 func DetailsHandler(w http.ResponseWriter, req *http.Request, artists []artistsStruc, relation []relationStruct, location []locationStruct, dates []datesStruct) {
-	artistID, err := strconv.Atoi(req.URL.Query().Get("id"))
+	artistID := req.URL.Query().Get("ID")
+	var artistIDint int
+	if artistID == "" {
+		ErrorHandler(w, req, http.StatusInternalServerError, "no ID in URL")
+		return
+	}
+	artistIDint, err := strconv.Atoi(artistID)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 	t, err := template.ParseFiles(`templates/details.html`)
 	if err != nil {
@@ -54,10 +59,10 @@ func DetailsHandler(w http.ResponseWriter, req *http.Request, artists []artistsS
 		ErrorHandler(w, req, http.StatusNotFound, "details.html not found")
 	}
 	data := pageData{
-		Artists:   artists[artistID-1],
-		Locations: location,
-		Dates:     dates,
-		Relation:  relation,
+		Artists:   artists[artistIDint-1],
+		Locations: location[artistIDint-1],
+		Dates:     dates[artistIDint-1],
+		Relation:  relation[artistIDint-1],
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	err = t.Execute(w, data)
