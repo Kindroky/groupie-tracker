@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(160deg, #1a1a7d 0%, #9260c6 100%);
+    background-attachment: fixed;
+    color: #c3eff8;
+}
+
+.errorContainer {
+    margin-top: 20%;
+    margin-inline: auto;
+    background: rgba(255,255,255,0.3);
+    width: fit-content;
+    border: #BC00c6 solid ;
+    border-radius: 10px;
+    padding: 20px;
+}
