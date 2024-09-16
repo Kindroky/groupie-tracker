@@ -1,67 +1,46 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <body>
+        <div class="container">
+            {{range .}}
+                <div class="losange">
+                    <div class="card" style="background-image: url({{.Image}});">
+                        <p>Click to see details</p>
+                    </div>
+                </div>
+            {{end}}
+        </div>
+    </body>
+</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/index.css">
-    <title>The Music Tarot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-    
-        .header h1 {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0;
-        }
-    
-        .cards-container {
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-    
-        .details-button {
-            display: inline-block;
-            margin-top: 10px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333333;
-            transition: color 0.3s ease;
-        }
-    
-        .details-button:hover {
-            color: #ffcc00;
-        }
-    </style>
+    <title>Groupie Tracker</title>
 </head>
 <body>
-    <header>
-        <h1 style="font-family: Garamond, serif; font-size: 24px; font-weight: bold; text-align: center;">The Music Tarot</h1>
+    <header class="header">
+        <div class="header-left">By</div>
+        <h1>Track your favourite artists</h1>
+        <div class="header-right">
+            <a href="/about">About</a>
+        </div>
     </header>
     <div class="cards-container">
         {{range .}}
-            <div classe="losange">
-                <div class="card" style="background-image: url({{.Image}});">
-                    <a href="/details?ID={{.ID}}">
-                        <h2>{{.Name}}</h2>
-                        <a href="/details?ID={{.ID}}" class="details-button">Learn more about {{.Name}}</a>
-                    </a>
-                </div>
-            </div>
+            <a href="/details?ID={{.ID}}" class="card" aria-label="Learn more about {{.Name}}" style="background-image: url({{.Image}});">
+                <div class="test">
+                    <h2 class="textDetail">{{.Name}}</h2>
+                </div>                
+            </a>
         {{end}}
     </div>
 </body>
