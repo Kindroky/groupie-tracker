@@ -114,18 +114,26 @@ body {
     background-color: black;
     /*background: linear-gradient(135deg, #6F4F28, #8b6d4b);*/
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: #e0e0e0;
     text-decoration: none;
-    width: 200px; 
-    height: 200px;
+    width: 250px; 
+    height: 250px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.test {
+    background: rgba(0,0,0,0);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
 }
 
 .textDetail {
@@ -146,7 +154,11 @@ body {
     pointer-events: none;
 }
 
-.card:hover > .textDetail {
+.card:hover > .test {
+    background: rgba(0,0,0,0.5);
+}
+
+.card:hover .textDetail {
     color: rgba(255,255,255,1);
 }
 
