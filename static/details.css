@@ -70,7 +70,7 @@ body {
     }
 
     /* Slide the CD out from behind the cover on hover */
-    .album-cover:hover .cd {
+    .album-cover:hover ~ .cd {
         transform: translateY(-50%) translateX(150%); /* Slide CD out to the right */
     }
     .album-cover {
