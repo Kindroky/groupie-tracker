@@ -18,12 +18,33 @@ type artistsStruc struct {
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
 }
-type relationNoIndex struct {
-	Index []relationStruct `json:"index"`
+type apiNoIndex1 struct {
+	IndexRel []relationStruct `json:"index"`
 }
 type relationStruct struct {
 	ID             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
+}
+type apiNoIndex2 struct {
+	IndexLoc []locationStruct `json:"index"`
+}
+type locationStruct struct {
+	ID        int      `json:"id"`
+	Locations []string `json:"locations"`
+}
+type apiNoIndex3 struct {
+	IndexDat []datesStruct `json:"index"`
+}
+type datesStruct struct {
+	ID    int      `json:"id"`
+	Dates []string `json:"dates"`
+}
+
+type pageData struct {
+	Artists   artistsStruc
+	Locations []locationStruct
+	Dates     []datesStruct
+	Relation  []relationStruct
 }
 
 func fetchArtists() []artistsStruc {
@@ -41,7 +62,7 @@ func fetchArtists() []artistsStruc {
 }
 
 func fetchRelation() []relationStruct {
-	var relation relationNoIndex
+	var relation apiNoIndex1
 	apiRelation, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
 	if err != nil {
 		log.Fatal(err)
@@ -51,5 +72,33 @@ func fetchRelation() []relationStruct {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	return relation.Index
+	return relation.IndexRel
+}
+
+func fetchLocation() []locationStruct {
+	var locations apiNoIndex2
+	apiLocations, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer apiLocations.Body.Close()
+	err = json.NewDecoder(apiLocations.Body).Decode(&locations)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	return locations.IndexLoc
+}
+
+func fetchDates() []datesStruct {
+	var dates apiNoIndex3
+	apiDates, err := http.Get("https://groupietrackers.herokuapp.com/api/dates")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer apiDates.Body.Close()
+	err = json.NewDecoder(apiDates.Body).Decode(&dates)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	return dates.IndexDat
 }

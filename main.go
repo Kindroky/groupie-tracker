@@ -8,21 +8,23 @@ import (
 
 func main() {
 	artists := fetchArtists()
+	location := fetchLocation()
+	dates := fetchDates()
 	relation := fetchRelation()
-	serverCreate(artists)
+	serverCreate(artists, relation, location, dates)
 }
 
-func serverCreate(artists []artistsStruc) {
+func serverCreate(artists []artistsStruc, relation []relationStruct, location []locationStruct, dates []datesStruct) {
 	indexHandler := func(w http.ResponseWriter, req *http.Request) {
 		IndexHandler(w, req, artists)
 	}
 	detailsHandler := func(w http.ResponseWriter, req *http.Request) {
-		DetailsHandler(w, req)
+		DetailsHandler(w, req, artists, relation, location, dates)
 	}
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
-	mux.HandleFunc("/details,", detailsHandler)
 	mux.HandleFunc("/", indexHandler)
+	mux.HandleFunc("/details/", detailsHandler)
 
 	server := &http.Server{
 		Addr:              ":8080",          //adresse du server (le port choisi est à titre d'exemple)
