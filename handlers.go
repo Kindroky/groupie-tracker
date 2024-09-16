@@ -55,6 +55,10 @@ func DetailsHandler(w http.ResponseWriter, req *http.Request, artists []artistsS
 	if err != nil {
 		fmt.Println(err)
 	}
+	if artistIDint > len(artists) || artistIDint < 1 {
+		ErrorHandler(w, req, http.StatusNotFound, "Page not found")
+		return
+	}
 	t, err := template.ParseFiles(`templates/details.html`)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusNotFound, "details.html not found")
