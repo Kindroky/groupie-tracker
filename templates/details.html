@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Name}} - Band Details</title>
+    <title>{{.Artists.Name}} - Band Details</title>
     <style>
     body {
         background-color: rgb(62, 51, 33);
@@ -96,18 +96,18 @@
             <!-- CD behind the cover -->
             <div class="cd">
                 <div class="cd-content">
-                    <p>{{.Name}}</p>
-                    <p>Members: {{.Members}}</p>
-                    <p>Creation Date: {{.CreationDate}}</p>
-                    <p>First Album: {{.FirstAlbum}}</p>
+                    <p>{{.Artists.Name}}</p>
+                    <p>Members: {{.Artists.Members}}</p>
+                    <p>Creation Date: {{.Artists.CreationDate}}</p>
+                    <p>First Album: {{.Artists.FirstAlbum}}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="band-details">
-        <h1>{{.Name}}</h1>
-        <p>Locations and Dates: {{.Relations}}</p>
+        <h1>{{.Artists.Name}}</h1>
+        <p>Locations and Dates: {{.Relation.ID}}</p>
     </div>
 </body>
 </html>
