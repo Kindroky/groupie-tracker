@@ -1,0 +1,88 @@
+body {
+        background: linear-gradient(160deg, #73ff71 0%, #074218 100%);
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: rgb(23, 20, 20);
+        text-align: center;
+        font-size: 36px;
+        margin-top: 20px;
+    }
+
+    .band-members {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-family: verdana;
+        font-size: 20px;
+        color: black;
+        text-align: right;
+    }
+
+    .container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 150px auto;
+        margin-left: 85px; /* Shift container to the left of the page center */
+        justify-content: center;
+    }
+    .cd {
+        position: absolute;
+        top: 50%; 
+        right: 0; 
+        width: 390px; /* Slightly smaller CD */
+        height: 390px;
+        background-color: black;
+        border-radius: 50%;
+        border: 2px solid white;
+        transform: translateY(-50%) translateX(50%); /* CD is half hidden behind the album cover */
+        transition: transform 0.5s ease;
+        position: absolute;
+        z-index: 1; 
+    }
+    .album-cover {
+        width: 400px;
+        height: 400px;
+        background-size: cover;
+        border: 3px solid #0c0a0a;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        margin-inline: auto;
+        position: absolute;
+        z-index: 2; 
+    }
+
+    /* Small white circle in the middle of the CD */
+    .cd::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 55px;
+        height: 55px;
+        background-color: #47b546;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+    }
+
+    /* Slide the CD out from behind the cover on hover */
+    .album-cover:hover .cd {
+        transform: translateY(-50%) translateX(150%); /* Slide CD out to the right */
+    }
+    .album-cover {
+        opacity: 0.99;
+    }
+    .cd-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        z-index: 3;
+    }
