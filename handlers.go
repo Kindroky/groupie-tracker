@@ -29,15 +29,17 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, errorCode int, error
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request, artists []artistsStruc) {
+	if req.URL.Path != "/" {
+		ErrorHandler(w, req, http.StatusNotFound, "Page not found")
+		return
+	}
 	t, err := template.ParseFiles(`templates/index.html`)
 	if err != nil {
-		fmt.Println(err)
 		ErrorHandler(w, req, http.StatusNotFound, "index.html not found")
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	err = t.Execute(w, artists)
 	if err != nil {
-		fmt.Println(err)
 		ErrorHandler(w, req, http.StatusInternalServerError, "internal server error")
 	}
 }
@@ -55,7 +57,6 @@ func DetailsHandler(w http.ResponseWriter, req *http.Request, artists []artistsS
 	}
 	t, err := template.ParseFiles(`templates/details.html`)
 	if err != nil {
-		fmt.Println(err)
 		ErrorHandler(w, req, http.StatusNotFound, "details.html not found")
 	}
 	data := pageData{
