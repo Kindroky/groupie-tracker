@@ -21,10 +21,14 @@ func serverCreate(artists []artistsStruc, relation []relationStruct, location []
 	detailsHandler := func(w http.ResponseWriter, req *http.Request) {
 		DetailsHandler(w, req, artists, relation, location, dates)
 	}
+	aboutHandler := func(w http.ResponseWriter, req *http.Request) {
+		AboutHandler(w, req)
+	}
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	mux.HandleFunc("/", indexHandler)
-	mux.HandleFunc("/details/", detailsHandler)
+	mux.HandleFunc("/details", detailsHandler)
+	mux.HandleFunc("/about", aboutHandler)
 
 	server := &http.Server{
 		Addr:              ":8080",          //adresse du server (le port choisi est à titre d'exemple)

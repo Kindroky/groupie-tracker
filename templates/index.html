@@ -8,14 +8,14 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-left">By</div>
+        <div class="header-left">by <br> Damien <br> Athénaïs <br> Abel</div>
         <h1>Track your favourite artists</h1>
     </header>
     <div class="cards-container">
         {{range .}}
             <a href="/details/?ID={{.ID}}" class="card" aria-label="Learn more about {{.Name}}" style="background-image: url({{.Image}});">
                 <div class="test">
-                    <h2 class="textDetail">{{.Name}}</h2>
+                    <h2 class="textDetail">Learn more about <br> {{.Name}}</h2>
                 </div>                
             </a>
         {{end}}
