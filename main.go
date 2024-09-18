@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func main() {
+func main() { // Scraping of the 4 API + Create server
 	artists := fetchArtists()
 	location := fetchLocation()
 	dates := fetchDates()
@@ -15,6 +15,7 @@ func main() {
 }
 
 func serverCreate(artists []artistsStruc, relation []relationStruct, location []locationStruct, dates []datesStruct) {
+	// No error handler directly, see handlers.go for this
 	indexHandler := func(w http.ResponseWriter, req *http.Request) {
 		IndexHandler(w, req, artists)
 	}
@@ -24,7 +25,7 @@ func serverCreate(artists []artistsStruc, relation []relationStruct, location []
 	aboutHandler := func(w http.ResponseWriter, req *http.Request) {
 		AboutHandler(w, req)
 	}
-	mux := http.NewServeMux()
+	mux := http.NewServeMux() // Mux for multiple handlers
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/details", detailsHandler)
