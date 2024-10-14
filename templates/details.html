@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="/static/details.css">
 </head>
 <body>
-    <h1>{{.Artists.Name}}</h1>
-    <div class="button">
-        <a href="/" class="button-link">Return to main page</a>
-    </div>
+    <header class="header">
+        <div class="button">
+            <a href="/" class="button-link">Return to main page</a>
+        </div>
+        <h1>{{.Artists.Name}}</h1>        
+    </header>
     <div class="container">
         <div class="album-cover" style="background-image: url({{.Artists.Image}});"></div>
-            <!-- CD behind the cover -->
+        <!-- CD behind the cover -->
         <div class="cd">
             <div class="cd-content">
                 <p>{{.Artists.Name}}</p>
@@ -22,22 +24,21 @@
             </div>
         </div>
     </div>
-
     <div class="band-details">
         <p>Members: </p>
         <br>
         {{range .Artists.Members}}
-            <p>{{.}}</p>
+        <p>{{.}}</p>
         {{end}}
     </div>
     <div class="locations-dates">
         <p>Locations and Dates:</p>
         <br>
         {{range $Locations, $Dates := .Relation.DatesLocations}}
-            <p>{{$Locations}}:</p>
-            {{range $Date := $Dates}}
-                <p>{{$Date}}</p>
-            {{end}}
+        <p>{{$Locations}}:</p>
+        {{range $Date := $Dates}}
+        <p>{{$Date}}</p>
+        {{end}}
         {{end}}
     </div>
 </body>

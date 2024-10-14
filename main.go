@@ -27,7 +27,7 @@ func serverCreate(artists []artistsStruc, relation []relationStruct, location []
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	mux.HandleFunc("/", indexHandler)
-	mux.HandleFunc("/details", detailsHandler)
+	mux.HandleFunc("/details/", detailsHandler)
 	mux.HandleFunc("/about", aboutHandler)
 
 	server := &http.Server{

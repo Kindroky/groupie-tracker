@@ -1,151 +1,179 @@
 body {
-        background: linear-gradient(160deg, #a3f5a3 0%, #1e803a 100%);
-        background-attachment: fixed;
-        margin: 0;
-        padding: 0;
-    }
+    font-family: Arial, sans-serif;
+    background: linear-gradient(160deg, #1a1a7d 0%, #9260c6 100%);
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-inline: auto;
+    color: rgb(23, 20, 20);
+    text-align: center;
+    font-size: 36px;
+    margin-top: 20px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.header {
+    padding: 10px;
+    background: linear-gradient(135deg, #0b2969 0%, #3d2a5b 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #c6d9e7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    color: #c6d9e7;
+}
+
+.band-details{
+    top: 50px;
+    font-family: Verdana;
+    font-weight: 400;
+    font-size: 17px;
+    color: black;
+    text-align: right;
+    margin: -468px auto;
+    margin-right: 400px;
+    background-color: #6F6FFF;
+    padding: 20px;
+    border: 1px solid #05260a;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 14vw;
+    border-radius: 5px;
     
-    h1 {
-        margin-inline: auto;
-        color: rgb(23, 20, 20);
-        text-align: center;
-        font-size: 36px;
-        margin-top: 20px;
-        font-family: Arial;
-        font-weight: bold;
-    }
-    .band-details{
-        top: 50px;
-        right: 50px;
-        font-family: Verdana;
-        font-weight: 400;
-        font-size: 17px;
-        color: black;
-        text-align: right;
-        margin: -468px auto;
-        margin-right: 368px;
-        background-color: #84b76c;
-        padding: 20px;
-        border: 1px solid #05260a;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        width: 150px;
+}
 
-    }
-    .band-members {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-family: Courier;
-        font-weight: 900;
-        font-size: 20px;
-        color: black;
-        text-align: right;
-    }
+.band-members {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: Courier;
+    font-weight: 900;
+    font-size: 20px;
+    color: black;
+    text-align: right;
+}
 
-    .container {
-        position: relative;
-        width: 400px;
-        height: 400px;
-        margin: 65px auto;
-        margin-left: 15px; /* Shift container to the left of the page center */
-        justify-content: center;
-        z-index: 2; /* ensure container and its children are in front */
-    }
-    .cd {
-        position: absolute;
-        top: 50%; 
-        right: 0; 
-        width: 390px;
-        height: 390px;
-        background-color: black;
-        border-radius: 50%;
-        border: 2px solid white;
-        transform: translateY(-50%) translateX(50%);
-        transition: transform 0.5s ease;
-        z-index: 1; /* CD behind album cover */
-    }
+.container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 65px auto;
+    margin-left: 15px; /* Shift container to the left of the page center */
+    justify-content: center;
+    z-index: 2; /* ensure container and its children are in front */
+}
+
+.cd {
+    position: relative;
+    top: 13vw;
+    width: 24vw;
+    height: 24vw;
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid white;
+    transform: translateY(-50%) translateX(50%);
+    transition: transform 0.5s ease;
+    z-index: 1; /* CD behind album cover */
+}
+
+.album-cover {
+    width: 26vw;
+    height: 26vw;
+    background-size: cover;
+    border: 3px solid #0c0a0a;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin-inline: auto;
+    position: absolute;
+    z-index: 2; /* Album cover above CD */
+}
+
+@media (max-width: 400px)
+{
     .album-cover {
-        width: 400px;
-        height: 400px;
-        background-size: cover;
-        border: 3px solid #0c0a0a;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        margin-inline: auto;
-        position: absolute;
-        z-index: 2; /* Album cover above CD */
+        width: 10vw
     }
+}
 
-    /* Small white circle in the middle of the CD */
-    .cd::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 55px;
-        height: 55px;
-        background-color: #75cb75;
-        border-radius: 50%;
-        border: 2px solid #ffffff;
-    }
+/* Small white circle in the middle of the CD */
+.cd::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4vw;
+    height: 4vw;
+    background-color: #1a1a7d;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
 
-    /* Slide the CD out from behind the cover on hover */
-    .album-cover:hover ~ .cd {
-        transform: translateY(-50%) translateX(150%); /* Slide CD out to the right */
-    }
-    .album-cover {
-        opacity: 0.99;
-    }
-    .cd-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-family: arial;
-        font-weight: 900;
-        font-size: 14px;
-        text-align: center;
-        margin-top: -100px;
-        z-index: 3;
-    }
-    
-    .locations-dates {
-        position: absolute;
-        top: 125px;
-        right: 15px;
-        background-color: #c4f3af;
-        padding: 20px;
-        border: 1px solid #05260a;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        width: 300px;
-    }
+/* Slide the CD out from behind the cover on hover */
+.album-cover:hover ~ .cd {
+    transform: translateY(-50%) translateX(150%); /* Slide CD out to the right */
+}
 
-    p {
-        margin: 5px 0;
-        font-size: 17px;
-        font-family: Courier;
-        font-weight: bolder
-    }
-    
-    .button-link {
-        display: inline-block;
-        position: absolute;
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        text-decoration: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: #084a1e;
-        background-color: #adbe86;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        margin-top: -5%;
-        margin-left: 1%;
-    }
-    
-    .button-link:hover {
-        background-color: #c1f34e;
-    }
+.album-cover {
+    opacity: 0.99;
+}
+
+.cd .cd-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: arial;
+    font-weight: 900;
+    font-size: 1vw;
+    text-align: center;
+    margin-top: -100px;
+    z-index: 3;
+}
+
+.locations-dates {
+    position: absolute;
+    top: 125px;
+    right: 15px;
+    background-color: #8F8FFF;
+    padding: 20px;
+    border: 1px solid #05260a;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20vw;
+    border-radius: 5px;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 17px;
+    font-family: Courier;
+    font-weight: bolder
+}
+
+.button-link {
+    text-decoration: none;
+    color: #c6d9e7;
+    background: linear-gradient(135deg, #0d0b4a 0%, #2e2a8e 100%);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    display: inline-block;
+    position: absolute;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    text-align: center;
+    margin-top: -1.5%;
+    margin-left: 1%;
+}
+
+.button-link:hover {
+    background: linear-gradient(135deg, #744ecd, #c7a1e0);
+}
