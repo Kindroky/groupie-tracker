@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// All structures needed for scraping the APIs, NoIndexes ones are to avoid index in json
 type artistsStruc struct {
 	ID           int      `json:"id"`
 	Name         string   `json:"name"`
@@ -40,6 +41,7 @@ type datesStruct struct {
 	Dates []string `json:"dates"`
 }
 
+// Structure combining all 4 APIs
 type pageData struct {
 	Artists   artistsStruc
 	Locations locationStruct
@@ -49,12 +51,12 @@ type pageData struct {
 
 func fetchArtists() []artistsStruc {
 	var artists []artistsStruc
-	apiArtist, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	apiArtist, err := http.Get("https://groupietrackers.herokuapp.com/api/artists") // Get function to scrap
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer apiArtist.Body.Close()
-	err = json.NewDecoder(apiArtist.Body).Decode(&artists)
+	err = json.NewDecoder(apiArtist.Body).Decode(&artists) // Decoding json file from API
 	if err != nil {
 		fmt.Println("error:", err)
 	}
@@ -63,12 +65,12 @@ func fetchArtists() []artistsStruc {
 
 func fetchRelation() []relationStruct {
 	var relation apiNoIndex1
-	apiRelation, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
+	apiRelation, err := http.Get("https://groupietrackers.herokuapp.com/api/relation") // Get function to scrap
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer apiRelation.Body.Close()
-	err = json.NewDecoder(apiRelation.Body).Decode(&relation)
+	err = json.NewDecoder(apiRelation.Body).Decode(&relation) // Decoding json file from API
 	if err != nil {
 		fmt.Println("error:", err)
 	}
@@ -77,12 +79,12 @@ func fetchRelation() []relationStruct {
 
 func fetchLocation() []locationStruct {
 	var locations apiNoIndex2
-	apiLocations, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
+	apiLocations, err := http.Get("https://groupietrackers.herokuapp.com/api/locations") // Get function to scrap
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer apiLocations.Body.Close()
-	err = json.NewDecoder(apiLocations.Body).Decode(&locations)
+	err = json.NewDecoder(apiLocations.Body).Decode(&locations) // Decoding json file from API
 	if err != nil {
 		fmt.Println("error:", err)
 	}
@@ -91,12 +93,12 @@ func fetchLocation() []locationStruct {
 
 func fetchDates() []datesStruct {
 	var dates apiNoIndex3
-	apiDates, err := http.Get("https://groupietrackers.herokuapp.com/api/dates")
+	apiDates, err := http.Get("https://groupietrackers.herokuapp.com/api/dates") // Get function to scrap
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer apiDates.Body.Close()
-	err = json.NewDecoder(apiDates.Body).Decode(&dates)
+	err = json.NewDecoder(apiDates.Body).Decode(&dates) // Decoding json file from API
 	if err != nil {
 		fmt.Println("error:", err)
 	}
